@@ -28,7 +28,7 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: (origin, callback) => callback(null, true),
     credentials: true,
   })
 );
@@ -36,7 +36,7 @@ app.use(
 // Socket.io Setup
 export const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: (origin: any, callback: any) => callback(null, true),
     credentials: true,
   },
 });
